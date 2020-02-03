@@ -8,19 +8,19 @@
 
 ### Install
 
-##### Prerequisites:
+#### Prerequisites:
 - Some basic understanding of the used technologies
 - Have a domain name in place pointing to a public folder inside your web server
 - Have Apache, Mysql and PHP 7+ installed.
 
-##### Then: 
+#### Then: 
 - Download the project in that folder
 - Run `composer install` to add depencencies and generate autoload files
 - Access /install.php to create database and insert dummy data.
 
 ### Configure
 
-##### The config file lets you define:
+#### The config file lets you define:
 - A name for the website, a slogan, an app key
 - The backend entrance path, an admin username and a pass
 - A SMTP server for contact us forms
@@ -31,7 +31,7 @@
 
 ### Manage
 
-##### The content(pages) can be managed using the backend interface:
+#### The content(pages) can be managed using the backend interface:
 - At this point there is one basic page type which can be easily become a photo album, a catalog list or a blog entry by adding the right elements to it (catalog list, contact form, comments box, publishing date, featured image, thumbnails list).
 - Page slugs are not automatically generated!
 - Paths are an important piece, as on front side they are used to identify the requested page and its relation with other pages. The only rule for a page to be displayed is to use the same paths as defined in the configuration file.
@@ -47,3 +47,16 @@
 - Test with flat files, SQLite, PostgreSQL
 - Import pages from document files
 - Build more plug-ins, more themes.
+
+## Screenshots
+
+![screenshot](https://github.com/dtabirca/phprapidcms/blob/master/_upls/demo/manage-content.png "Backend interface for page management")
+
+
+![screenshot](https://github.com/dtabirca/phprapidcms/blob/master/_upls/demo/blog-entry.png "Page demo 1")
+
+
+![screenshot](https://github.com/dtabirca/phprapidcms/blob/master/_upls/demo/catalog-list.png "Page demo 2")
+
+
+![screenshot](https://github.com/dtabirca/phprapidcms/blob/master/_upls/demo/contact-form.png "Page demo 3")
