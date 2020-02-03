@@ -1,6 +1,7 @@
 {
     "name": "dtabirca/phprapidcms",
     "description": "A flexible light base for plain websites",
+    "version": "0.9.0-beta",
     "require": {
       "php": ">=7.0",
       "twig/twig": "^2.0",
