@@ -1,0 +1,33 @@
+{% if current or POST.new %}
+<form method="post">
+	<input name="title" value="{{ current.title }}" placeholder="title" required>
+	<input name="path" value="{{ current.path }}" placeholder="path" required>
+	<input name="created" value="{{ current.created }}" placeholder="created">
+	<!--input name="keywords" value="{{ current.keywords }}" placeholder="keywords"-->
+	<input name="description" value="{{ current.description }}" placeholder="description">
+	<textarea style="width:100%;min-height:250px;" name="body">{{ current.body }}</textarea>
+	<input type="submit" name="save" value="save">
+</form>
+<form>	
+<input type="submit" value="back" >	
+</form>
+{% else %}
+<form style="float:left" method="get">
+<select name="type" onChange="parentNode.submit()">
+	{% for one in all_page_types %}
+	<option {% if GET.type == one %}selected{% endif %}>{{ one }}</option>
+	{% endfor %}
+</select>	
+</form>
+<form style="float:right" method="post">
+<input type="submit" value="new" name="new">	
+</form>
+{% if simple_list %}
+	<table class="table table-striped">
+	{% for slid, slt in simple_list %}
+		<tr><td><a href="?sl={{ slid }}">{{ slt }}</a></td></tr>
+	{% endfor %}
+	</table>
+{% endif %}
+
+{% endif %}

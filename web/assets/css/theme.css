@@ -1,0 +1,25 @@
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+}
+input.fill-me{
+	display: none !important;
+}
+a,p,h1,h2,h3,button,input,label{
+	font-family: 'Open Sans', sans-serif !important;
+}
+.navbar-brand{
+  padding:10px 15px 0 15px;
+  margin-left:-10px !important;
+}
+.navbar-slogan{
+  float:left;
+  font-size:60%;
+}
+.navbar-logo img{
+  float:left;
+  height:50px;
+}
+#footer{
+  margin-top:40px;
+}

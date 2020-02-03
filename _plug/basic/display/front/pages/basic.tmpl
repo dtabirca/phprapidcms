@@ -1,0 +1,85 @@
+{% if item.state==1 %} 
+	
+	{% if item.pieces.featured_image %}
+        <a href="{{ item.pieces.featured_image }}" data-lightbox="main"><img src="{{ item.pieces.featured_image }}" alt="" class="img-responsive"></a><br>
+	{% endif %}
+	{% if item.pieces.more_images %}
+		{% set more_images = item.pieces.more_images|split(',') %}
+		{% for p in more_images %}
+        	<a href="{{ p }}" data-lightbox="main"><img src="{{ p }}" alt="" class="img-thumbnail" style="max-width:100px"></a>
+        {% endfor %}
+        <br><br>
+	{% endif %}	
+
+	{% if item.pieces.show_publish_date %}
+		<i><time>On {{ item.created|date("F jS \\a\\t g:ia") }}</time></i><br>
+	{% endif %}
+	{{ item.body|raw|nl2br }}
+
+	{% if item.pieces.show_catalog_list %}
+	<div class="row text-center">
+	{% for child in post_list %}
+	    {% if child.state == '1' %}
+	            <a href="{{ BASE_URL }}{{ child.path }}">
+	            <div class="col-md-3 col-sm-6 hero-feature">
+	                <div class="thumbnail">
+	                    <div class="caption">
+	                        {% if child.pieces.featured_image %}
+	                        <img src="{{ child.pieces.featured_image }}" alt="" class="img-responsive">
+	                        {% endif %}
+	                        <h3>{{ child.title }}</h3>
+	                        {% if child.pieces.show_publish_date %}
+	                            <i><time>On {{ child.created|date("F jS \\a\\t g:ia") }}</time></i>
+	                        {% endif %}
+	                        <p>{{ child.body|striptags|truncate(100, true) }}</p>
+	                    </div>
+	                </div>
+	            </div>
+	            </a>
+	    {% endif %}
+	{% endfor %}
+	</div>
+	{% endif %}
+
+	{% if item.pieces.show_contact_form %}
+	<form class="form-horizontal" role="form" method="post">
+	    <input type="text" name="fill_me" class="fill-me" autocomplete="off">
+	    <input type="hidden" name="app_key" value="{{ APP_KEY }}">
+	    <div class="form-group">
+	        <label for="name" class="col-sm-2 control-label">Name</label>
+	        <div class="col-sm-5">
+	            <input type="text" class="form-control" id="name" name="name" value="" required>
+	        </div>
+	    </div>
+	    <div class="form-group">
+	        <label for="email" class="col-sm-2 control-label">Email</label>
+	        <div class="col-sm-5">
+	            <input type="email" class="form-control" id="email" name="email" value="" required>
+	        </div>
+	    </div>
+	    <div class="form-group">
+	        <label for="message" class="col-sm-2 control-label">Message</label>
+	        <div class="col-sm-5">
+	            <textarea class="form-control" rows="4" name="message" required></textarea>
+	        </div>
+	    </div>
+	    <div class="form-group">
+	        <label for="human" class="col-sm-2 control-label">{{ formula }} =</label>
+	        <div class="col-sm-5">
+	            <input type="text" class="form-control" id="human" name="human" required>
+	        </div>
+	    </div>
+	    <div class="form-group">
+	        <div class="col-sm-5 col-sm-offset-2">
+	            <input id="submit" name="submit" type="submit" value="Send" class="btn btn-primary">
+	        </div>
+	    </div>
+	</form>
+	{% endif %}
+
+	{% if item.pieces.show_comments_box %}
+		<br><br>
+		<div class="fb-comments" data-href="{{ DOMAIN }}{{ BASE_URL }}{{ page }}" data-numposts="5"></div>
+		<div id="disqus_thread"></div>
+	{% endif %}
+{% endif %}

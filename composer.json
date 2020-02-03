@@ -1,0 +1,15 @@
+{
+    "name": "dtabirca/phprapidcms",
+    "description": "A flexible light base for plain websites",
+    "require": {
+      "php": ">=7.0",
+      "twig/twig": "^2.0",
+      "twig/extensions": "1.5.x",
+      "phpmailer/phpmailer": "5.2.x",
+      "erusev/parsedown": "1.7.x"
+    },
+    "config": {
+        "vendor-dir": "_common/vendor",
+        "optimize-autoloader": true
+    }
+}

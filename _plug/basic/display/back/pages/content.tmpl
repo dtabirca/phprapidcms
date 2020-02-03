@@ -1,0 +1,125 @@
+{% if current or POST.new %}
+
+<form method="post">
+
+	<div class="row no-gutters">
+		<div class="form-check col-md-4">
+			<input type="checkbox" class="form-check-input" id="inputCatalog" name="show_catalog_list" value="1" {% if current.pieces.show_catalog_list == 1 %}checked{% endif %}>
+			<label class="form-check-label" for="inputCatalog">Create Catalog</label>
+			<small class="help-block">Attach a list of child pages.</small>
+
+			<input type="checkbox" class="form-check-input" id="inputContact" name="show_contact_form" value="1" {% if current.pieces.show_contact_form == 1 %}checked{% endif %}>
+			<label class="form-check-label" for="inputContact">Add Contact Form</label>
+			<small class="help-block">Insert a contact us form.</small>
+		</div>
+		<div class="form-check col-md-4">
+			<input type="checkbox" class="form-check-input" id="inputComments" name="show_comments_box" value="1" {% if current.pieces.show_comments_box == 1 %}checked{% endif %}>
+			<label class="form-check-label" for="inputComments">Add Comments Box</label>
+			<small class="help-block">Include Disqus/Facebook comments.</small>
+		
+			<input type="checkbox" class="form-check-input" id="inputDate" name="show_publish_date" value="1" {% if current.pieces.show_publish_date == 1 %}checked{% endif %}>
+			<label class="form-check-label" for="inputDate">Display publishing date</label>
+			<small class="help-block">Show when this item got created.</small>
+		</div>
+		<div class="form-check col-md-4">
+			<input type="checkbox" class="form-check-input" id="inputHide" name="hide_this" value="1" {% if current.state is same as("0") %}checked{% endif %}>
+			<label class="form-check-label" for="inputHide">Hide page</label>
+			<small class="help-block">Prevent this page to be accessed on front.</small>
+		</div>
+	</div>
+	<br>
+	<div class="form-group">
+		<label for="inputTitle">Page Title</label>
+		<input class="form-control" id="inputTitle" name="title" placeholder="Title" value="{{ current.title }}" required>
+	</div>
+
+	<div class="row no-gutters">
+		<div class="form-group col-md-6">
+		    <label for="inputPath">Page Path</label>
+	    	<input class="form-control" id="inputPath" name="path" placeholder="path/to/page" value="{{ current.path }}">
+			<small class="help-block">Complete URI path to this page.</small>
+		</div>
+
+		<div class="form-group col-md-6">
+			<label for="inputParent">Parent Path</label>
+			<input class="form-control" id="inputParent" name="parent" placeholder="path/to/parent" value="{{ current.parent }}">
+			<small class="help-block">Complete URI path to this page's parent.</small>
+		</div>
+	</div>
+
+	<div class="form-group">
+    	<label for="inputBody">Body</label>
+    	<textarea class="form-control" id="inputBody" style="min-height:320px;" name="body">{{ current.body }}</textarea>
+    	<small class="help-block">Use <a href="https://www.markdownguide.org/basic-syntax/" target="_blank">Markdown</a></small>
+  	</div>
+
+	<div class="form-group">
+    	<label for="inputDesc">Meta description</label>
+    	<input class="form-control" id="inputDesc" name="meta_description" value="{{ current.pieces.meta_description }}" placeholder="meta description">
+  	</div>
+
+  	<div class="form-group">
+    	<label for="inputTags">Meta keywords</label>
+    	<input class="form-control" id="inputTags" name="tags" value="{{ current.pieces.tags }}" placeholder="tags">
+	</div>
+
+  	<div class="form-group">
+    	<label for="inputImage">Featured Image</label>
+    	<input class="form-control" id="inputImage" name="featured_image" value="{{ current.pieces.featured_image }}" placeholder="featured image">
+    	<small class="help-block">Add a photo at the top of the page.</small>
+  	</div>
+
+	<div class="form-group">
+    	<label for="inputImageMore">More Images</label>
+    	<input class="form-control" id="inputImageMore" name="more_images" value="{{ current.pieces.more_images }}" placeholder="more images">
+    	<small class="help-block">Attach multiple photos as a list of thumbnails.</small>
+	</div>
+
+	<input type="submit" name="save" value="save" class="btn btn-primary" style="position:fixed;bottom:10px;right:10px;">
+</form>
+
+<form>	
+	<input type="submit" value="back" class="btn btn-secondary" style="position:fixed;bottom:10px;right:70px;">	
+</form>
+
+{% else %}
+
+<!--form style="float:left" method="get">
+	<select name="type" onChange="parentNode.submit()" class="form-control">
+	{% for one in all_page_types %}
+		<option value="{{ one }}" {% if GET.type == one %}selected{% endif %}>{{ one }}</option>
+	{% endfor %}
+	</select>	
+</form-->
+
+<form style="float:right" method="post">
+	<input type="submit" value="new" name="new" class="btn btn-primary">	
+</form>
+
+<br><br>
+{% if simple_list %}
+	<table class="table table-striped">
+		<tr>
+			<th>Title</th>
+			<th>Path</th>
+			<th>Parent</th>
+			<th>Hidden</th>
+			<th>Since</th>
+			<th>Actions</th>
+		</tr>
+	{% for slid, slt in simple_list %}
+		<tr>
+			<td><a href="?type={{ GET.type }}&se={{ slt.id }}">{{ slt.title }}</a></td>
+			<td>{{ slt.path }}</td>
+			<td>{{ slt.parent }}</td>
+			<td>{{ slt.state==0 ? 'Y' : '' }}</td>
+			<td>{{ slt.created }}</td>
+			<td><a href="?type={{ GET.type }}&se={{ slt.id }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+			<a href="?type={{ GET.type }}&sd={{ slt.id }}"><span class="glyphicon glyphicon-remove" aria-hidden="true" onclick="return confirm('R U sure?')"></span></a>
+			</td>
+		</tr>
+	{% endfor %}
+	</table>
+{% endif %}
+
+{% endif %}

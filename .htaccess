@@ -1,0 +1,15 @@
+Options -Indexes
+#RewriteBase /blank/
+
+RewriteEngine  on
+RewriteCond %{REQUEST_URI} !/_upls/.* [NC]
+RewriteCond %{REQUEST_URI} !/components/.* [NC]
+RewriteCond %{REQUEST_URI} !/style/.* [NC]
+RewriteCond %{REQUEST_URI} !/download/.* [NC]
+RewriteCond %{REQUEST_URI} !/preview/.* [NC]
+RewriteCond %{REQUEST_URI} !/assets/.* [NC]
+RewriteCond %{REQUEST_URI} !favicon.ico [NC]
+RewriteCond %{REQUEST_URI} !install.php [NC]
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)?$ web/index.php?q=$1 [L,QSA]

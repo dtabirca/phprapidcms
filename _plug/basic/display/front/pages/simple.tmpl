@@ -1,0 +1,17 @@
+{% if item.state==1 %} 
+	<!--i><time>{{ item.created|date("F jS \\a\\t g:ia") }}</time></i><br-->
+	{% if item.pieces.featured_image %}
+        <a href="{{ item.pieces.featured_image }}" data-lightbox="main"><img src="{{ item.pieces.featured_image }}" alt="" class="img-responsive"></a><br>
+	{% endif %}
+	{% if item.pieces.more_images %}
+		{% set more_images = item.pieces.more_images|split(',') %}
+		{% for p in more_images %}
+        	<a href="{{ p }}" data-lightbox="main"><img src="{{ p }}" alt="" class="img-thumbnail" style="max-width:100px"></a>
+        {% endfor %}
+        <br><br>
+	{% endif %}	
+	{{ item.body|raw|nl2br }}
+	<!--{% if item.pieces.tags %}	<br><br>Tags: {{ item.pieces.tags }}{% endif %}-->
+	{% if item.pieces.show_comments==1 %}
+	{% endif %}
+{% endif %}

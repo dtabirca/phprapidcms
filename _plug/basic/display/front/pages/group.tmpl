@@ -1,0 +1,41 @@
+{% if item.state==1 %} 
+
+    {% if item.pieces.featured_image %}
+        <a href="{{ item.pieces.featured_image }}" data-lightbox="main"><img src="{{ item.pieces.featured_image }}" alt="" class="img-responsive"></a><br>
+    {% endif %}
+    {% if item.pieces.more_images %}
+        {% set more_images = item.pieces.more_images|split(',') %}
+        {% for p in more_images %}
+            <a href="{{ p }}" data-lightbox="main"><img src="{{ p }}" alt="" class="img-thumbnail" style="max-width:100px"></a>
+        {% endfor %}
+        <br><br>
+    {% endif %} 
+
+    {% if item.body %}
+        {{ item.body|raw|nl2br }}
+    {% endif %}   
+
+    <div class="row text-center">
+    {% for child in post_list %}
+        {% if child.state == '1' %}
+                <a href="{{ BASE_URL }}{{ child.path }}">
+                <div class="col-md-3 col-sm-6 hero-feature">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            {% if child.pieces.featured_image %}
+                            <img src="{{ child.pieces.featured_image }}" alt="" class="img-responsive">
+                            {% endif %}
+                            <h3>{{ child.title }}</h3>
+                            {% if child.pieces.show_publish_date %}
+                                <i><time>{{ child.created|date("F jS \\a\\t g:ia") }}</time></i>
+                            {% endif %}
+                            <p>{{ child.body|striptags|truncate(100, true) }}</p>
+                        </div>
+                    </div>
+                </div>
+                </a>
+        {% endif %}
+    {% endfor %}
+    </div>
+
+{% endif %}
